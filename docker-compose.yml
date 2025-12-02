@@ -1,0 +1,17 @@
+services:
+  transcoder:
+    build: ./transcoder
+    container_name: transcoder
+    volumes:
+      - ./transcoder/media/input:/workspace/media/input
+      - ./transcoder/media/output:/workspace/media/output
+
+  nginx:
+    build: ./nginx
+    container_name: nginx
+    ports:
+      - "8080:80"
+    volumes:
+      - ./front/dist:/usr/share/nginx/html:ro
+      - ./transcoder/media/output/streams:/streams:ro
+    restart: unless-stopped
