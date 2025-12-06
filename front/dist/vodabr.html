@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VoD ABR Bideoak</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/video.js@8.23.4/dist/video-js.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/video.js@8.23.4/dist/video.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/videojs-contrib-quality-levels@4.1.0/dist/videojs-contrib-quality-levels.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/videojs-hls-quality-selector@2.0.0/dist/videojs-hls-quality-selector.min.js"></script>
+</head>
+<body>
+    <header>
+        <nav>
+            <button onclick="window.location.href='index.html'">Hasiera</button>
+            <button onclick="window.location.href='vod.html'">Aurregrabatutako bideoak</button>
+            <button onclick="window.location.href='vodabr.html'">Aurregrabatutako bideoak ABR</button>
+            <button onclick="window.location.href='livestreaming.html'">Zuzeneko emanaldiak</button>
+        </nav>
+    </header>
+    <div id="app">
+        <h1>Aurregrabatutako bideoak ABR</h1>
+
+        <div class="video-selector">
+            <label for="video-select">Aukeratu bideoa:</label>
+            <select id="video-select"></select>
+        </div>
+
+        <div class="video-wrapper">
+            <video
+                id="my-video"
+                class="video-js"
+                controls
+                preload="auto"
+            >
+                <p class="vjs-no-js">
+                To view this video please enable JavaScript, and consider upgrading to a
+                web browser that
+                <a href="https://videojs.com/html5-video-support/" target="_blank"
+                    >supports HTML5 video</a
+                >
+                </p>
+            </video>
+        </div>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>

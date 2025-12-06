@@ -9,7 +9,8 @@ SEG_DUR="${3:-4}"
 
 NAME="$(basename "${INPUT%.*}")"
 HLS_DIR="$OUT_BASE/streams/hls/$NAME"
-mkdir -p "$HLS_DIR"
+MP4_DIR="$OUT_BASE/streams/mp4"
+mkdir -p "$HLS_DIR" "$MP4_DIR"
 
 # Ladder (altura / bitrate)
 HEIGHTS=(1080 720 480 360 240)
@@ -38,4 +39,6 @@ for i in "${!HEIGHTS[@]}"; do
   echo "$VAR_PL" >> "$MASTER"
 done
 
-echo "Amaituta: /streams/hls/$NAME/master.m3u8"
+cp "$INPUT" "$MP4_DIR/$NAME.mp4"
+
+echo "Amaituta: /streams/hls/$NAME/master.m3u8 y /streams/mp4/$NAME.mp4"
