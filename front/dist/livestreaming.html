@@ -5,39 +5,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Zuzeneko Emanaldiak</title>
     <link rel="stylesheet" href="styles.css">
-    <link href="https://vjs.zencdn.net/8.23.4/video-js.css" rel="stylesheet" />
-    <script src="app.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/video.js@8.23.4/dist/video-js.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/video.js@8.23.4/dist/video.min.js"></script>
 </head>
 <body>
     <header>
         <nav>
             <button onclick="window.location.href='index.html'">Hasiera</button>
             <button onclick="window.location.href='vod.html'">Aurregrabatutako bideoak</button>
+            <button onclick="window.location.href='vodabr.html'">Aurregrabatutako bideoak ABR</button>
             <button onclick="window.location.href='livestreaming.html'">Zuzeneko emanaldiak</button>
         </nav>
     </header>
     <div id="app">
         <h1>Zuzeneko emanaldiak</h1>
-        <video
-            id="my-video"
-            class="video-js"
-            controls
-            preload="auto"
-            width="640"
-            height="264"
-            poster="MY_VIDEO_POSTER.jpg"
-            data-setup="{}"
-        >
-            <source src="MY_VIDEO.mp4" type="video/mp4" />
-            <source src="MY_VIDEO.webm" type="video/webm" />
-            <p class="vjs-no-js">
-            To view this video please enable JavaScript, and consider upgrading to a
-            web browser that
-            <a href="https://videojs.com/html5-video-support/" target="_blank"
-                >supports HTML5 video</a
+
+        <div class="video-selector">
+            <label for="video-select">Aukeratu zuzenekoa:</label>
+            <select id="video-select"></select>
+        </div>
+
+        <div class="video-wrapper">
+            <video
+                id="my-video"
+                class="video-js video-live"
+                controls
+                preload="auto"
             >
-            </p>
-        </video>
+                <p class="vjs-no-js">
+                To view this video please enable JavaScript, and consider upgrading to a
+                web browser that
+                <a href="https://videojs.com/html5-video-support/" target="_blank"
+                    >supports HTML5 video</a
+                >
+                </p>
+            </video>
+        </div>
     </div>
+    <script src="app.js"></script>
 </body>
 </html>

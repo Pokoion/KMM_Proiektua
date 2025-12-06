@@ -5,29 +5,42 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!select || !video) return;
 
     const isABR = video.classList.contains('video-js');
+    const isLive = video.classList.contains('video-live');
     let player = null;
 
     if (isABR && typeof videojs !== 'undefined') {
         player = videojs('my-video');
-        if (player.hlsQualitySelector) {
+        if (player.hlsQualitySelector && !isLive) {
             player.hlsQualitySelector({ displayCurrentQuality: true });
         }
     }
 
-    fetch('/api/videos')
+    const subFolder = isLive ? 'live' : 'hls';
+
+    fetch(`/api/streams/${subFolder}/`)
         .then(res => res.json())
         .then(dirs => {
-            console.log('Direktorioak:', dirs);
             const videos = dirs
                 .filter(d => d.type === 'directory')
-                .map(d => ({
-                    name: d.name,
-                    hls: `/streams/hls/${d.name}/master.m3u8`,
-                    mp4: `/streams/mp4/${d.name}.mp4`
-                }));
+                .map(d => {
+                    if (isLive) {
+                        return {
+                            name: d.name,
+                            hls: `/streams/live/${d.name}/index.m3u8`
+                        };
+                    } else {
+                        return {
+                            name: d.name,
+                            hls: `/streams/hls/${d.name}/master.m3u8`,
+                            mp4: `/streams/mp4/${d.name}.mp4`
+                        };
+                    }
+                });
 
             if (videos.length === 0) {
-                select.innerHTML = '<option>Ez dago bideorik</option>';
+                select.innerHTML = isLive 
+                    ? '<option>Ez dago zuzeneko emanaldirik</option>'
+                    : '<option>Ez dago bideorik</option>';
                 return;
             }
 
@@ -55,7 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         })
         .catch(err => {
-            console.error('Errorea bideoak kargatzean:', err);
+            console.error('Errorea kargatzean:', err);
             select.innerHTML = '<option>Errorea kargatzean</option>';
         });
 });

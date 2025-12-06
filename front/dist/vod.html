@@ -5,28 +5,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VoD Bideoak</title>
     <link rel="stylesheet" href="styles.css">
-    <script src="app.js"></script>
 </head>
 <body>
     <header>
         <nav>
             <button onclick="window.location.href='index.html'">Hasiera</button>
             <button onclick="window.location.href='vod.html'">Aurregrabatutako bideoak</button>
-            <button onclick="window.location.href='vodABR.html'">Aurregrabatutako bideoak ABR</button>
+            <button onclick="window.location.href='vodabr.html'">Aurregrabatutako bideoak ABR</button>
             <button onclick="window.location.href='livestreaming.html'">Zuzeneko emanaldiak</button>
         </nav>
     </header>
     <div id="app">
         <h1>Aurregrabatutako bideoak</h1>
+
+        <div class="video-selector">
+            <label for="video-select">Aukeratu bideoa:</label>
+            <select id="video-select"></select>
+        </div>
+
         <div class="video-wrapper">
             <video
                 id="my-video"
                 controls
                 preload="auto">
-                <source src="/streams/mp4/my_video.mp4" type="video/mp4" />
                 Tu navegador no soporta video HTML5.
             </video>
         </div>
     </div>
+    <script src="app.js"></script>
 </body>
 </html>
