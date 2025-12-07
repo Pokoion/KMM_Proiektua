@@ -132,3 +132,11 @@ h1 {
     border-color: #1976d2;
     box-shadow: 0 0 0 2px rgba(25, 118, 210, 0.2);
 }
+
+.video-js .vjs-load-progress {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.video-js .vjs-load-progress div {
+    background: rgba(255, 255, 255, 0.4);
+}

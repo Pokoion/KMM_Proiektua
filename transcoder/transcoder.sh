@@ -12,7 +12,7 @@ HLS_DIR="$OUT_BASE/streams/hls/$NAME"
 MP4_DIR="$OUT_BASE/streams/mp4"
 mkdir -p "$HLS_DIR" "$MP4_DIR"
 
-# Ladder (altura / bitrate)
+# Ladder
 HEIGHTS=(1080 720 480 360 240)
 VBR=(6000k 3000k 1500k 800k 400k)
 
@@ -29,6 +29,7 @@ for i in "${!HEIGHTS[@]}"; do
   ffmpeg -hide_banner -y -i "$INPUT" \
     -vf "scale=-2:${H}" \
     -c:v libx264 -preset veryfast -b:v "$B" \
+    -force_key_frames "expr:gte(t,n_forced*${SEG_DUR})" \
     -c:a aac -b:a 128k \
     -hls_time "$SEG_DUR" -hls_playlist_type vod -hls_list_size 0 \
     -hls_segment_filename "$HLS_DIR/${NAME}_${H}p_%03d.ts" \
