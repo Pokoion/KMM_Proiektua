@@ -11,6 +11,7 @@ services:
     container_name: nginx
     ports:
       - "8080:80"
+      - "1935:1935"
     volumes:
       - ./front/dist:/usr/share/nginx/html:ro
       - ./transcoder/media/output/streams:/streams
